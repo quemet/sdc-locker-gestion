@@ -10,9 +10,10 @@
 import router from '@adonisjs/core/services/router'
 import db from '@adonisjs/lucid/services/db'
 
-router.get('/lockers', async ({ response }) => {
+router.get('/lockers', async ({ view }) => {
     const lockers = await db.query().from("lockers").select("*")
-    return response.status(200).json(lockers)
+    return view.render('pages/index.edge', { lockers: lockers })
+    // return response.status(200).json(lockers)
 });
 
 router.post('/lockers', async ({ request, response }) => {
